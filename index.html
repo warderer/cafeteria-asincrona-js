@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asincronismo en JavaScript - Cafetería Demo</title>
+    <meta name="description"
+        content="Entiende el asincronismo en JavaScript con ejemplos prácticos de una cafetería. Aprende sobre setTimeout, callbacks y operaciones síncronas vs asíncronas.">
+    <meta name="keywords"
+        content="JavaScript, asincronismo, setTimeout, callbacks, operaciones síncronas, operaciones asíncronas, programación web">
+    <meta name="author" content="César Guerra">
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <img src="cesar_guerra_logo.png" alt="por César Guerra" class="logo">
+        <h1>☕ Cafetería Asíncrona</h1>
+        <p class="subtitle">Entendiendo el asincronismo en JavaScript con ejemplos prácticos</p>
+
+        <div class="section">
+            <h2>🎯 Conceptos Clave</h2>
+            <div class="highlight">
+                <strong>Asincronismo:</strong> JavaScript puede ejecutar tareas que toman tiempo (como setTimeout) sin
+                bloquear el resto del código. Mientras una tarea espera, otras pueden ejecutarse.
+            </div>
+            <div class="highlight" style="margin-top: 15px;">
+                <strong>Callback:</strong> Una función que se pasa como parámetro a otra función y se ejecuta en un
+                momento específico. En setTimeout, el callback es la función que se ejecuta después del tiempo
+                especificado.
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h2>🔄 Operaciones Asíncronas</h2>
+                <p>Simula una cafetería donde cada bebida toma diferente tiempo en prepararse:</p>
+
+                <div class="buttons">
+                    <button onclick="prepararCafe()">☕ Café (2s)</button>
+                    <button onclick="prepararTe()">🍵 Té (1s)</button>
+                    <button onclick="prepararCapuchino()">🥛 Capuchino (3s)</button>
+                    <button onclick="prepararVariasBebidas()">🍹 Pedido Multiple</button>
+                </div>
+
+                <div class="code-example">
+                    function prepararCafe() {
+                    log('🔸 Iniciando café...', 'start');
+
+                    setTimeout(() => {
+                    log('✅ ¡Café listo!', 'complete');
+                    }, 2000);
+
+                    log('⏳ Café en preparación...', 'process');
+                    }
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>⚡ Operaciones Síncronas</h2>
+                <p>Comparación con código que bloquea la ejecución:</p>
+
+                <div class="buttons">
+                    <button onclick="operacionSincrona()">🔒 Operación Bloqueante</button>
+                    <button onclick="demostrarDiferencia()">⚖️ Comparar Sync vs Async</button>
+                </div>
+
+                <div class="code-example">
+                    function operacionSincrona() {
+                    log('🔸 Inicio operación síncrona', 'sync');
+
+                    // Simulamos bloqueo con bucle
+                    const inicio = Date.now();
+                    while (Date.now() - inicio < 2000) { // Bloquea durante 2 segundos } log('✅ Operación síncrona
+                        completa', 'sync' ); } </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📝 Registro de Actividad</h2>
+                <div class="buttons">
+                    <button class="clear-btn" onclick="limpiarLog()">🗑️ Limpiar Log</button>
+                </div>
+                <div id="log" class="log">
+                    <div class="log-entry">💡 Presiona los botones para ver el asincronismo en acción...</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🧠 Explicación Detallada</h2>
+                <div class="explanation">
+                    <h3>¿Por qué es importante el asincronismo?</h3>
+                    <p><strong>Sin asincronismo:</strong> Si preparar un café toma 2 segundos, toda la cafetería se
+                        detiene hasta que esté listo. Ningún otro pedido puede procesarse.</p>
+
+                    <p><strong>Con asincronismo:</strong> Mientras el café se prepara en segundo plano, podemos tomar
+                        otros pedidos, preparar té, limpiar mesas, etc.</p>
+
+                    <h3>setTimeout() - El mecanismo clave</h3>
+                    <div class="code-example">
+                        setTimeout(función, tiempoEnMilisegundos)
+                        // Ejecuta la función después del tiempo especificado
+                        // NO bloquea el código que sigue
+                    </div>
+
+                    <h3>Orden de ejecución</h3>
+                    <p>JavaScript ejecuta en este orden:</p>
+                    <ol>
+                        <li><strong>Código síncrono</strong> - Se ejecuta inmediatamente</li>
+                        <li><strong>setTimeout</strong> - Se programa para después</li>
+                        <li><strong>Más código síncrono</strong> - Continúa sin esperar</li>
+                        <li><strong>Callbacks de setTimeout</strong> - Se ejecutan cuando llega su momento</li>
+                    </ol>
+                </div>
+            </div>
+            <footer>
+                <p>© 2025 César Guerra - <a href="https://www.cesarguerra.mx" target="_blank">cesarguerra.mx</a></p>
+            </footer>
+        </div>
+
+</body>
+
+</html>
